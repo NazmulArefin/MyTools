@@ -1,0 +1,48 @@
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   NecessaryTools/Views/MissMatch/Index.cshtml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git commit -a "new"
+fatal: Paths with -a does not make sense.
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git commit -m "new"
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+        modified:   NecessaryTools/Views/MissMatch/Index.cshtml
+
+no changes added to commit
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git add NecessaryTools/Views/MissMatch/Index.cshtml
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git commit NecessaryTools/Views/MissMatch/Index.cshtml -m "bugfix"
+[master fa00cc1] bugfix
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+N A Z M U L@DESKTOP-7DS0IFE MINGW64 /e/GitHub/MyTools (master)
+$ git push -u origin master
+fatal: HttpRequestException encountered.
+   An error occurred while sending the request.
+Username for 'https://github.com': NazmulArefin
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 518 bytes | 0 bytes/s, done.
+Total 6 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+To https://github.com/NazmulArefin/MyTools.git
+   58761a3..fa00cc1  master -> master
+Branch master set up to track remote branch master from origin.
