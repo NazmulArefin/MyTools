@@ -58,13 +58,13 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="form-group">
                             @Html.LabelFor(m => m.CalculateAge.DOB)
-                            @Html.TextBoxFor(m => m.CalculateAge.DOB, new { @class = "form-control", type = "text", placeholder = "Date of Birth" })
+                            @Html.TextBoxFor(m => m.CalculateAge.DOB, new { @class = "form-control datepicker", type = "text", placeholder = "Date of Birth" })
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="form-group">
                             @Html.LabelFor(m => m.CalculateAge.CurrentDate)
-                            @Html.TextBoxFor(m => m.CalculateAge.CurrentDate, new { @class = "form-control", type = "text", placeholder = "To Date" })
+                            @Html.TextBoxFor(m => m.CalculateAge.CurrentDate, new { @class = "form-control datepicker", type = "text", placeholder = "To Date" })
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -96,15 +96,38 @@
     
     $(document).ready(function () {
 
-        $("#CalculateAge_DBO").datepicker({
+        $("#CalculateAge_DOB, #CalculateAge_CurrentDate").datepicker({
+            format: 'dd/mm/yyyy',
             changeMonth: true,
             changeYear: true,
             autoclose: true
         });
-        $("#CalculateAge_CurrentDate").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            autoclose: true
+
+        $("#CalculateAge_CurrentDate").keyup(function() {
+            var first = $("#CalculateAge_DOB").val();
+            var second = $("#CalculateAge_CurrentDate").val();
+
+            if (second < first) {
+                (this).val("");
+            }
+        });
+
+        $("#CalulateAge").click(function() {
+            var first = $("#CalculateAge_DOB").val();
+            var second = $("#CalculateAge_CurrentDate").val();
+            var json = {
+                DOB :first,
+                CurrentDate: second
+        }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AgeCal", "MissMatch")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    
+                }
+            });
         });
 
         $("#FindBtn").click(function () {

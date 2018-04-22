@@ -25,5 +25,11 @@ namespace NecessaryTools.Controllers
                 return Json(missList);
             }
         }
-	}
+
+        public ActionResult AgeCal(MissMatch.AgeCalculator newAgeCalculator)
+        {
+            string abc = MissMatch.AgeCalculator.AgeCalculate(newAgeCalculator);
+            return Json(MissMatch.AgeCalculator.AgeCalculate(newAgeCalculator));
+        }
+    }
 }

@@ -49,6 +49,35 @@ namespace NecessaryTools.Models
             [DisplayName(@"Current Date:")]
             public string CurrentDate { get; set; }
 
+            public string Year { get; set; }
+            public string Month { get; set; }
+            public string Day { get; set; }
+
+            public static string AgeCalculate(AgeCalculator ageCalculator)
+            {
+                DateTime dob = Convert.ToDateTime(Convert.ToDateTime(ageCalculator.DOB).ToString("yyyy-MM-dd"));
+                DateTime today = Convert.ToDateTime(Convert.ToDateTime(ageCalculator.CurrentDate).ToString("yyyy-MM-dd"));
+
+                int months = today.Month - dob.Month;
+                int years = today.Year - dob.Year;
+
+                if (today.Day < dob.Day)
+                {
+                    months--;
+                }
+
+                if (months < 0)
+                {
+                    years--;
+                    months += 12;
+                }
+
+                int days = (today - dob.AddMonths((years * 12) + months)).Days;
+
+                return
+                    $"{years} year{((years == 1) ? "" : "s")}, {months} month{((months == 1) ? "" : "s")} and {days} day{((days == 1) ? "" : "s")}";
+
+            }
         }
 
         public static List<Missing> GetMissingItems(MissMatch aMissMatch)
