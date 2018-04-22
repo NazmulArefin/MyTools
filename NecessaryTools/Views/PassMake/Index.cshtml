@@ -1,0 +1,41 @@
+﻿@model NecessaryTools.Models.PassMake
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<div class="row">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Make a password</h1>
+            <p class="lead">Enter your password and get encripted one!</p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <center>
+            <legend>Auto generate password</legend>
+            @{
+                Html.RenderPartial("_MakePass", Model);
+            }
+        </center>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <center>
+            <legend>Break GTR password</legend>
+            @{
+                Html.RenderPartial("_GTRPassword", Model);
+            }
+        </center>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+

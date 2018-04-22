@@ -1,0 +1,32 @@
+﻿@model NecessaryTools.Models.PassMake
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m=>m.Password)
+        @Html.TextBoxFor(m=>m.Password, new {@class="form-control"})
+            
+        @Html.LabelFor(m=>m.AutoGenePass)
+        @Html.TextBoxFor(m=>m.AutoGenePass, new {@class="form-control"})
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $("#Password").keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("PassGen", "PassMake")',
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({
+                Pass: $(this).val()
+            }),
+            success: function (response) {
+                $("#AutoGenePass").val(response.AutoGenePass);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+</script>

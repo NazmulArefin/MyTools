@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Web;
+using Microsoft.Ajax.Utilities;
+
+namespace NecessaryTools.Models
+{
+    public class MissMatch
+    {
+        [DisplayName(@"Pest idol list here:")]
+        public List<string> FirstList { get; set; }
+        [DisplayName(@"Pest testing list here:")]
+        public List<string> SecondList { get; set; }
+
+        public Missing MissingData { get; set; }
+        public CommaSeparateData SeparateCommanData { get; set; }
+        public AgeCalculator CalculateAge { get; set; }
+
+
+
+        public class Missing
+        {
+            public int Index { get; set; }
+            public string Value { get; set; }
+        }
+
+        public class CommaSeparateData
+        {
+            [DisplayName(@"Pest list here:")]
+            public List<string> List { get; set; }
+            public int Line { get; set; }
+            public string Index { get; set; }
+            public string Value { get; set; }
+
+            public CommaSeparateData()
+            {
+                Line = 0;
+                Index = "0";
+                Value = "0";  
+            }
+        }
+
+        public class AgeCalculator
+        {
+            [DisplayName(@"Date of Birth:")]
+            public string DOB { get; set; }
+            [DisplayName(@"Current Date:")]
+            public string CurrentDate { get; set; }
+
+        }
+
+        public static List<Missing> GetMissingItems(MissMatch aMissMatch)
+        {
+            List<string> aStringList = aMissMatch.FirstList;
+            List<string> bStringList = aMissMatch.SecondList;
+            List<Missing> missingList = new List<Missing>();
+
+            for (int i = 0; i < bStringList.Count; i++)
+            {
+                if (aStringList.Contains(bStringList[i]))
+                {
+                    continue;
+                }
+                else
+                {
+                    Missing aMissing = new Missing
+                    {
+                        Index = i+1,
+                        Value = bStringList[i]
+                    };
+                    missingList.Add(aMissing);
+                }
+            }
+            return missingList;
+        }
+    }
+}

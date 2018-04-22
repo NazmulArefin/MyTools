@@ -1,0 +1,158 @@
+﻿@model NecessaryTools.Models.MissMatch
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />*@
+    <title>Index</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        text-align: center
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        width: 200px;
+    }
+</style>
+
+
+<div class="panel with-nav-tabs panel-info">
+    <div class="panel-heading" style="padding: 0px 15px">
+        <ul class="nav nav-tabs">
+            <li><a data-toggle="tab" id="#MissMatchInfo" href="#MissMatchInfo"><span class="glyphicon glyphicon-book"></span> Miss Match</a></li>
+            <li><a data-toggle="tab" id="#SeparateCommaData" href="#SeparateCommaData"><span class="glyphicon glyphicon-book"></span> Separate Comma Data</a></li>
+            <li><a data-toggle="tab" id="#CalculateAge" href="#CalculateAge"><span class="glyphicon glyphicon-book"></span> Calculate Age</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" role="tabpanel" id="MissMatchInfo">
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.FirstList)
+                    @Html.TextAreaFor(m => m.FirstList, new { style = "height: 250px;"})
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.SecondList)
+                    @Html.TextAreaFor(m => m.SecondList, new {style = "height: 250px;"})
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button type="button" id="FindBtn">Find</button>
+                </div>
+            </div>
+            <div class="tab-pane fade" role="tabpanel" id="SeparateCommaData">
+                
+            </div>
+            <div class="tab-pane fade" role="tabpanel" id="CalculateAge">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CalculateAge.DOB)
+                            @Html.TextBoxFor(m => m.CalculateAge.DOB, new { @class = "form-control", type = "text", placeholder = "Date of Birth" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CalculateAge.CurrentDate)
+                            @Html.TextBoxFor(m => m.CalculateAge.CurrentDate, new { @class = "form-control", type = "text", placeholder = "To Date" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-info" id="CalulateAge">Calulate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="panel-footer" id="footerResult" style="display: none">
+        <div class="panel-warning" id="result" style="display: none">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Index</td>
+                    <td>Values</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script>
+    
+    $(document).ready(function () {
+
+        $("#CalculateAge_DBO").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true
+        });
+        $("#CalculateAge_CurrentDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true
+        });
+
+        $("#FindBtn").click(function () {
+            var first = $("#FirstList").val().split('\n');
+            var second = $("#SecondList").val().split('\n');
+            var i;
+
+            var firstSeparatedArr = new Array();
+            for (i = 0; i < first.length; i++) {
+                firstSeparatedArr.push(first[i]);
+            }
+
+            var secondSeparatedArr = new Array();
+            for (i = 0; i < second.length; i++) {
+                secondSeparatedArr.push(second[i]);
+            }
+
+            var json = {
+                FirstList: firstSeparatedArr,
+                SecondList: secondSeparatedArr
+            }
+            //console.log(json);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Find", "MissMatch")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    if (data === "All data matched") {
+                        $("#result").html(data);
+                    } else {
+                        $("#result").clear();
+                        $("#footerResult").show();
+                        $("#result").show();
+                        data.forEach(function (val) {
+                            $('#result').last()
+                                .append("<tr><td>" + val.Index + "</td><td>" + val.Value + "</td></tr>");
+                        });
+                    }
+                    
+                }
+            });
+        });
+
+
+        $("#CalulateAge").click(function() {
+            
+        });
+    });
+</script>
