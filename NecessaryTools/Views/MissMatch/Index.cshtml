@@ -124,8 +124,9 @@
                 url: '@Url.Action("AgeCal", "MissMatch")',
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(json),
-                success: function (data) {
-                    
+                success: function (data) {                    
+                    $("#footerResult").show();
+					$("#footerResult").html(data);
                 }
             });
         });
