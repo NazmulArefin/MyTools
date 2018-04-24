@@ -76,6 +76,7 @@
         </div>
     </div>
     <div class="panel-footer" id="footerResult" style="display: none">
+        <p id="footerResult_message"></p>
         <div class="panel-warning" id="result" style="display: none">
             <table>
                 <tbody>
@@ -90,14 +91,24 @@
 </div>
 </body>
 </html>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.js"></script>
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
 <script>
     
     $(document).ready(function () {
 
-        $("#CalculateAge_DOB, #CalculateAge_CurrentDate").datepicker({
+        $("#CalculateAge_DOB").datepicker({
             format: 'dd/mm/yyyy',
+            endDate: new Date(),
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true
+        });
+
+
+        $("#CalculateAge_CurrentDate").datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: new Date(),
             changeMonth: true,
             changeYear: true,
             autoclose: true
@@ -157,10 +168,12 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(json),
                 success: function (data) {
-                    if (data === "All data matched") {
-                        $("#result").html(data);
+                    console.log(data);
+                    if (data === "All data in list b is cosist in list a.") {
+                        $("#footerResult").show();
+                        $("#footerResult").html(data);
                     } else {
-                        $("#result").clear();
+                        $("#result").html("");
                         $("#footerResult").show();
                         $("#result").show();
                         data.forEach(function (val) {

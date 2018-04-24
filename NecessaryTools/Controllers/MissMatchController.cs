@@ -19,7 +19,7 @@ namespace NecessaryTools.Controllers
         {
             List<MissMatch.Missing> missList = MissMatch.GetMissingItems(aMissMatch);
             if (missList.Count == 0)
-                return  Json("All data matched");
+                return  Json("All data in list b is cosist in list a.");
             else
             {
                 return Json(missList);
@@ -28,7 +28,6 @@ namespace NecessaryTools.Controllers
 
         public ActionResult AgeCal(MissMatch.AgeCalculator newAgeCalculator)
         {
-            string abc = MissMatch.AgeCalculator.AgeCalculate(newAgeCalculator);
             return Json(MissMatch.AgeCalculator.AgeCalculate(newAgeCalculator));
         }
     }

@@ -21,6 +21,7 @@ namespace NecessaryTools
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/jquery-1.12.4.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/bootstrap-datepicker.js"));
 
