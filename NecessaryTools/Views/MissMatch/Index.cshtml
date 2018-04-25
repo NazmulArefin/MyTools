@@ -39,19 +39,31 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" role="tabpanel" id="MissMatchInfo">
                 <div class="col-lg-4 col-md-4">
-                    @Html.LabelFor(m => m.FirstList)
-                    @Html.TextAreaFor(m => m.FirstList, new { style = "height: 250px;"})
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FirstList)
+                        @Html.TextAreaFor(m => m.FirstList, new {  @class = "form-control", style = "height: 250px;"})
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    @Html.LabelFor(m => m.SecondList)
-                    @Html.TextAreaFor(m => m.SecondList, new {style = "height: 250px;"})
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SecondList)
+                        @Html.TextAreaFor(m => m.SecondList, new { @class = "form-control", style = "height: 250px;"})
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <button type="button" id="FindBtn">Find</button>
+                    <button type="button" class="btn btn-info" id="FindBtn">Find</button>
                 </div>
             </div>
             <div class="tab-pane fade" role="tabpanel" id="SeparateCommaData">
-                
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SeparateCommanData.Line)
+                        @Html.TextAreaFor(m => m.SeparateCommanData.Line, new { @class = "form-control", style = "height: 250px; width: 500px;" })
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <button type="button" class="btn btn-info" id="SCDbtn">Find</button>
+                </div>
             </div>
             <div class="tab-pane fade" role="tabpanel" id="CalculateAge">
                 <div class="row">
@@ -181,14 +193,8 @@
                                 .append("<tr><td>" + val.Index + "</td><td>" + val.Value + "</td></tr>");
                         });
                     }
-                    
                 }
             });
-        });
-
-
-        $("#CalulateAge").click(function() {
-            
         });
     });
 </script>

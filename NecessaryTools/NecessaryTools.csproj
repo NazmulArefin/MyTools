@@ -196,6 +196,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Alyaradat Walmasrufat\AlMasrufatController.cs" />
+    <Compile Include="Controllers\Alyaradat Walmasrufat\AlYardatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MissMatchController.cs" />
@@ -204,6 +206,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Alyaradat Walmasrufat\AlYardat.cs" />
+    <Compile Include="Models\Alyaradat Walmasrufat\AlMasrufat.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MissMatch.cs" />
@@ -375,6 +379,8 @@
     <Content Include="Views\PassMake\_MakePass.cshtml" />
     <Content Include="Views\MissMatch\_SeparateCommanData.cshtml" />
     <Content Include="Views\MissMatch\_CalculateAge.cshtml" />
+    <Content Include="Views\AlYardat\Index.cshtml" />
+    <Content Include="Views\AlMasrufat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
